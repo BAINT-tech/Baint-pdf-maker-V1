@@ -18,15 +18,79 @@
             <p class="tagline">Transform Screenshots into Professional Newspaper-Style PDFs</p>
         </header>
 
+        <!-- Layout Selection -->
+        <section class="layout-section">
+            <h3>Choose Layout</h3>
+            <div class="layout-options">
+                <button class="layout-btn active" data-layout="single">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    Single Image
+                </button>
+                <button class="layout-btn" data-layout="vertical">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="3" width="18" height="8" rx="2"/>
+                        <rect x="3" y="13" width="18" height="8" rx="2"/>
+                    </svg>
+                    Vertical Split
+                </button>
+                <button class="layout-btn" data-layout="horizontal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="3" width="8" height="18" rx="2"/>
+                        <rect x="13" y="3" width="8" height="18" rx="2"/>
+                    </svg>
+                    Horizontal Split
+                </button>
+            </div>
+        </section>
+
         <!-- Upload Section -->
         <section class="upload-section">
-            <div class="upload-area" id="uploadArea">
-                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
-                </svg>
-                <p class="upload-text">Click to upload or drag & drop</p>
-                <p class="upload-subtext">PNG, JPG, JPEG supported</p>
-                <input type="file" id="fileInput" accept="image/*" hidden>
+            <div class="upload-grid" id="uploadGrid">
+                <!-- Image 1 Upload -->
+                <div class="upload-area" id="uploadArea1" data-image="1">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                    </svg>
+                    <p class="upload-text">Upload Image 1</p>
+                    <p class="upload-subtext">Click or drag & drop</p>
+                    <input type="file" id="fileInput1" accept="image/*" hidden>
+                </div>
+
+                <!-- Image 2 Upload (Hidden by default) -->
+                <div class="upload-area" id="uploadArea2" data-image="2" style="display:none;">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                    </svg>
+                    <p class="upload-text">Upload Image 2</p>
+                    <p class="upload-subtext">Click or drag & drop</p>
+                    <input type="file" id="fileInput2" accept="image/*" hidden>
+                </div>
+            </div>
+        </section>
+
+        <!-- Caption Labels Section -->
+        <section class="labels-section" id="labelsSection" style="display:none;">
+            <h3>Add Captions (Optional)</h3>
+            <div class="labels-grid">
+                <div class="label-input-group">
+                    <label for="caption1">Panel 1 Caption</label>
+                    <input type="text" id="caption1" placeholder="e.g., BEFORE, EXPECTATION, THEM">
+                </div>
+                <div class="label-input-group" id="caption2Group" style="display:none;">
+                    <label for="caption2">Panel 2 Caption</label>
+                    <input type="text" id="caption2" placeholder="e.g., AFTER, REALITY, US">
+                </div>
+            </div>
+            
+            <!-- Quick Presets -->
+            <div class="preset-buttons" id="presetButtons" style="display:none;">
+                <p class="preset-label">Quick Presets:</p>
+                <button class="preset-btn" data-preset="before-after">Before / After</button>
+                <button class="preset-btn" data-preset="expectation-reality">Expectation / Reality</button>
+                <button class="preset-btn" data-preset="them-us">Them / Us</button>
+                <button class="preset-btn" data-preset="then-now">Then / Now</button>
             </div>
         </section>
 
@@ -45,9 +109,19 @@
                     <p class="newspaper-date" id="newspaperDate"></p>
                 </div>
 
-                <!-- Image Container -->
-                <div class="image-container">
-                    <canvas id="imageCanvas"></canvas>
+                <!-- Images Container - Dynamic Layout -->
+                <div class="images-grid" id="imagesGrid">
+                    <!-- Image 1 Container -->
+                    <div class="image-panel" id="imagePanel1">
+                        <p class="panel-caption" id="panelCaption1"></p>
+                        <canvas id="imageCanvas1"></canvas>
+                    </div>
+
+                    <!-- Image 2 Container (Hidden by default) -->
+                    <div class="image-panel" id="imagePanel2" style="display:none;">
+                        <p class="panel-caption" id="panelCaption2"></p>
+                        <canvas id="imageCanvas2"></canvas>
+                    </div>
                 </div>
 
                 <!-- Auto Summary Section -->
